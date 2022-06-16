@@ -1,0 +1,130 @@
+.app {
+  text-align: center;
+  background: #8E24AA;
+  background: linear-gradient(45deg,  #304150 0%,#34608a 50%,#000000 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.time {
+  border-radius: 25px;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  font-size: 80px;
+}
+
+.button-reset {
+  background-color: #6ccfe7;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.5s;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button-change{
+  background-color: #6ccfe7;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.5s;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button-primary{
+  background-color: #68d6f1;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.5s;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline-width: 0;
+}
+
+.button-reset:hover{
+  background-color: #f1f1f1;
+}
+
+.button-change:hover{
+  background-color: #f1f1f1;
+}
+
+.button-primary:hover {
+  background-color: #000000;
+  border: 1px solid #1d2027;
+  pointer-events: painted;
+  opacity: 1;
+}
+
+.button-primary-active {
+  background-color: #5d75ff;
+  border: 1px solid #8d9df8;
+  color: white;
+}
+
+.button-primary-inactive {
+  background-color: #0b1a69;
+  border: 1px solid #152684;
+  color: rgb(255, 255, 255);
+}
+
+.Title{
+  margin-bottom: 50px;
+  font-size: 100px;
+  padding: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+}
+
+.Title::before{
+  width: 28px;
+  height: 5px;
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  margin-left: -14px;
+  background-color: #1f0909;
+} 
+.Title::after{
+  width: 100px;
+  height: 1px;
+  display: block;
+  content: "";
+  position: relative;
+  margin-top: 25px;
+  left: 50%;
+  margin-left: -50px;
+  background-color: #312121;
+}
+
+.first-input{
+  background-color: #000000;
+  color: white;
+}
