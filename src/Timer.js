@@ -3,27 +3,45 @@ import './Timer.css';
 import { useState, useEffect, useRef } from 'react';
 
 const Timer = () => {
-
+  /*  The states */
   const [segundos, setSegundos] = useState(0);
+  const [minutos,setMinutos] = useState(0);
   const [activo, setActivo] = useState(false);
   const [tipo, setTipo] = useState('Contador');
   const myRef = useRef(null);
+  const otherRef = useRef(null);
 
   function toggle() {
     setActivo(!activo);
+    console.log("toogle ejectuado")
   };
+
+  function reseteamoSeg(){
+    setSegundos(0)
+  }
 
   function reset() {
     setSegundos(0);
     setActivo(false);
+    setMinutos(0);
   };
 
   useEffect(() => {
     let intervalo = null;
-    if (activo && tipo === 'Contador') {
+    let minit = null;
+    if (activo && tipo === 'Contador' && segundos !== 59) {
       intervalo = setInterval(() => {
         setSegundos(segundos => segundos + 1);
-      }, 1000);
+      }, 1000)
+    }
+    else if (activo && tipo === 'Contador'){
+      console.log("rese")
+      setMinutos(minutos => minutos + 1)
+      reseteamoSeg()
+    }
+     if(activo && tipo === 'Cuenta Regresiva'&& segundos === 0){
+      setSegundos(59)
+      setMinutos(minutos => minutos - 1)
     }
     if (activo && tipo === 'Cuenta Regresiva') {
       intervalo = setInterval(() => {
@@ -31,15 +49,22 @@ const Timer = () => {
       }, 1000);
     }
     if (!activo && segundos !== 0 && tipo === 'Contador') {
+      console.log("chau")
       clearInterval(intervalo);
+      clearInterval(minit)
     }
-    if (segundos === 0 && tipo === 'Cuenta Regresiva') {
+    if (segundos === 0 && minutos === 0 && activo && tipo === "Cuenta Regresiva") {
       reset();
       clearInterval(intervalo);
+      clearInterval(minit);
+      cambioTipo()
     }
 
-    return () => clearInterval(intervalo);
-  }, [activo, segundos, tipo]);
+    return () =>{
+      clearInterval(intervalo);
+      clearInterval(minit)
+    };
+  }, [activo, segundos, tipo, minutos]);
 
   function cambioTipo() {
     if(tipo === 'Contador') setTipo('Cuenta Regresiva')
@@ -49,7 +74,14 @@ const Timer = () => {
   function agregaSegundos() {
     // `current` apunta al elemento de entrada de texto montado
     let ref = myRef.current.value
+    if(ref<0||ref>59){return}
     setSegundos(ref)
+  }
+
+  function agregaMinutos(){
+    let ref = otherRef.current.value
+    if(ref<0){return}
+    setMinutos(ref)
   }
 
 
@@ -60,7 +92,7 @@ const Timer = () => {
         Timer
       </div>
       <div className="time">
-        {segundos}S
+        {minutos}:{segundos}
       </div>
       <div className="row">
         <button onClick={toggle} className={`button button-primary button-primary-${activo ? 'active' : 'inactive'}`}>
@@ -73,6 +105,7 @@ const Timer = () => {
       <button className="button-change" onClick={cambioTipo}>
           {tipo}
       </button>
+      {tipo === 'Cuenta Regresiva' && <input className={"first-input"} ref={otherRef} onChange={agregaMinutos} type="number" placeholder="Ingresa Minutos" autoComplete="off"/>}
       {tipo === 'Cuenta Regresiva' && <input className={"first-input"} ref={myRef} onChange={agregaSegundos} type="number" placeholder="Ingresa Segundos" autoComplete="off"/>}
     </div>
   );
