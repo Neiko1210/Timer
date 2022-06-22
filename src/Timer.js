@@ -11,21 +11,24 @@ const Timer = () => {
   const myRef = useRef(null);
   const otherRef = useRef(null);
 
+  /*  Toogle for change the active*/  
   function toggle() {
-    setActivo(!activo);
-    console.log("toogle ejectuado")
+    setActivo(!activo)
   };
 
+  /*  Seconds reset */
   function reseteamoSeg(){
     setSegundos(0)
   }
 
+  /*  General reset */
   function reset() {
     setSegundos(0);
     setActivo(false);
     setMinutos(0);
   };
 
+  /*  Hooks */
   useEffect(() => {
     let intervalo = null;
     let minit = null;
@@ -35,7 +38,6 @@ const Timer = () => {
       }, 1000)
     }
     else if (activo && tipo === 'Contador'){
-      console.log("rese")
       setMinutos(minutos => minutos + 1)
       reseteamoSeg()
     }
@@ -49,8 +51,7 @@ const Timer = () => {
       }, 1000);
     }
     if (!activo && segundos !== 0 && tipo === 'Contador') {
-      console.log("chau")
-      clearInterval(intervalo);
+      clearInterval(intervalo)
       clearInterval(minit)
     }
     if (segundos === 0 && minutos === 0 && activo && tipo === "Cuenta Regresiva") {
